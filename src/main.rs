@@ -46,8 +46,6 @@ const SVG_FINGERPRINT: &str = "\
 enum AppRoutes {
   #[to("/")]
   Index,
-  #[to("/clickwrap")]
-  ClickWrap,
   #[to("/form1")]
   Form1,
   //   #[to("/form1/<_..>")]
@@ -74,7 +72,6 @@ fn Router1<G: Html>(cx: Scope) -> View<G> {
           div(class="app") {
             (match route.get().as_ref() {
               AppRoutes::Index => ClickWrapComponent(cx),
-              AppRoutes::ClickWrap => ClickWrapComponent(cx),
               AppRoutes::Form1 => Form1Component(cx),
             //   AppRoutes::Form1Nested(nested) => match nested {
             //     Form1Nested::Contact => ContactComponent(cx),
