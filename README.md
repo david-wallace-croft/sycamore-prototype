@@ -1,6 +1,6 @@
 # CroftSoft Sycamore Prototype
 
-- A prototype application using the Sycamore Framework
+- A prototype application using the Rust-based [Sycamore](https://github.com/sycamore-rs/sycamore) front-end framework
 
 ## Usage
 
