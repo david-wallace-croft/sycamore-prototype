@@ -1,6 +1,8 @@
 use sycamore::builder::prelude::*;
 use sycamore::prelude::*;
-use sycamore_router::{HistoryIntegration, Route, Router, RouterProps};
+use sycamore_router::{
+  navigate, HistoryIntegration, Route, Router, RouterProps,
+};
 
 const LOREM_IPSUM: &str = "Lorem ipsum dolor sit amet, \
   consectetur adipiscing elit, \
@@ -434,37 +436,36 @@ fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
             ),
         ),
     )
-    .c(a().attr("href", "/")
-      .c(
-        button()
-          .class("grid-row-6")
-          .attr("type", "button")
-          .t("Exit")
-          .c(
-            svg()
-              .attr("alt", "")
-              .attr("fill", "#000")
-              .attr("focusable", "false")
-              .attr("height", "24")
-              .attr("role", "presentation")
-              .attr("viewBox", "0 0 24 24")
-              .attr("width", "24")
-              .attr("xmlns", "http://www.w3.org/2000/svg")
-              .c(
-                path()
-                  .attr("alt", "")
-                  .attr("d", "M0 0h24v24H0z")
-                  .attr("fill", "none")
-                  .attr("role", "presentation"),
-              )
-              .c(
-                path()
-                  .attr("alt", "")
-                  .attr("d", "M5 17h14v2H5zm7-12L5.33 15h13.34z")
-                  .attr("role", "presentation"),
-              ),
-          ),
-      )
+    .c(
+      button()
+        .on("click", |_| { navigate("/")})
+        .class("grid-row-6")
+        .attr("type", "button")
+        .t("Exit")
+        .c(
+          svg()
+            .attr("alt", "")
+            .attr("fill", "#000")
+            .attr("focusable", "false")
+            .attr("height", "24")
+            .attr("role", "presentation")
+            .attr("viewBox", "0 0 24 24")
+            .attr("width", "24")
+            .attr("xmlns", "http://www.w3.org/2000/svg")
+            .c(
+              path()
+                .attr("alt", "")
+                .attr("d", "M0 0h24v24H0z")
+                .attr("fill", "none")
+                .attr("role", "presentation"),
+            )
+            .c(
+              path()
+                .attr("alt", "")
+                .attr("d", "M5 17h14v2H5zm7-12L5.33 15h13.34z")
+                .attr("role", "presentation"),
+            ),
+        ),
     ).view(cx)
 }
 
