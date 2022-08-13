@@ -1,0 +1,53 @@
+.btn-group-vertical
+{
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns:      12rem;
+  grid-template-columns: 12rem;
+  -ms-grid-rows:      auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto;
+}
+
+button
+{
+  -ms-grid-column: 1;
+  grid-column: 1;
+  margin: 1rem 0rem 0rem 1rem;
+  width: 6rem;
+}
+
+.grid-row-1
+{
+  -ms-grid-row: 1;
+  grid-row: 1;
+}
+
+.grid-row-2
+{
+  -ms-grid-row: 2;
+  grid-row: 2;
+}
+
+.grid-row-3
+{
+  -ms-grid-row: 3;
+  grid-row: 3;
+}
+
+.grid-row-4
+{
+  -ms-grid-row: 4;
+  grid-row: 4;
+}
+
+.grid-row-5
+{
+  -ms-grid-row: 5;
+  grid-row: 5;
+}
+
+.grid-row-6
+{
+  -ms-grid-row: 6;
+  grid-row: 6;
+}
