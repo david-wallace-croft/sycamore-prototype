@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+}
+
+button>svg {
+  display: block;
+  margin: auto;
+}
+
+div.main-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0rem;
+  margin-top: 1rem;
+}
+
+form {
+  margin-right: 1rem;
+}
+
+.form-control:not(:focus)::placeholder {
+
+  color: #555;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 150%;
+}
+
+h2 {
+  font-size: 125%;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 100%;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.help-block {
+
+  color: #555;
+}

@@ -18,10 +18,12 @@ fn App<G: Html>(cx: Scope) -> View<G> {
         .class("app-header")
         .t("Application Title [")
         .dyn_t(|| banner_width.get().to_string())
-        .t("px]"),
-    )
-    .c(
-      span().class("time-remaining").dyn_t(|| time_remaining.get().to_string()),
+        .t("px]")
+        .c(
+          span()
+            .class("time-remaining")
+            .dyn_t(|| time_remaining.get().to_string()),
+        ),
     )
     .c(div().class("app-content").c(div().class("app-navbar")))
     .c(ClickWrapComponent(cx))
