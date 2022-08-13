@@ -5,7 +5,7 @@
 ## Usage
 
 - cd sycamore-prototype
-- cargo run
+- trunk serve --open
 
 ## History
 
