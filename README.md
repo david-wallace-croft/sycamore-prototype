@@ -10,7 +10,7 @@
 
 - cd sycamore-prototype
 - cargo install trunk
-- trunk serve --open
+- trunk serve --open --public-url my-folder/sycamore-prototype
 
 ## Deploy
 
