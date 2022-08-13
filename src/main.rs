@@ -1,5 +1,6 @@
 use sycamore::builder::prelude::*;
 use sycamore::prelude::*;
+use sycamore_router::{HistoryIntegration, Route, Router, RouterProps};
 
 const LOREM_IPSUM: &str = "Lorem ipsum dolor sit amet, \
   consectetur adipiscing elit, \
@@ -8,8 +9,46 @@ const LOREM_IPSUM: &str = "Lorem ipsum dolor sit amet, \
   quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo \
   consequat.";
 
+#[derive(Route)]
+enum AppRoutes {
+  #[to("/")]
+  Index,
+  #[to("/form1")]
+  Form1,
+  #[not_found]
+  NotFound,
+}
+
+fn main() {
+  console_error_panic_hook::set_once();
+  console_log::init_with_level(log::Level::Debug).unwrap();
+  sycamore::render(|cx| component(|| AppComponent(cx)));
+}
+
 #[component]
-fn App<G: Html>(cx: Scope) -> View<G> {
+fn Router1<G: Html>(cx: Scope) -> View<G> {
+  view! {
+    cx,
+    Router {
+      integration: HistoryIntegration::new(),
+      view: |cx, route: &ReadSignal<AppRoutes>| {
+        view! {
+          cx,
+          div(class="app") {
+            (match route.get().as_ref() {
+              AppRoutes::Index => ClickWrapComponent(cx),
+              AppRoutes::Form1 => Form1Component(cx),
+              AppRoutes::NotFound => view! { cx, "404 Not Found" },
+            })
+          }
+        }
+      }
+    }
+  }
+}
+
+#[component]
+fn AppComponent<G: Html>(cx: Scope) -> View<G> {
   let banner_width: &Signal<u64> = create_signal(cx, 123);
   let time_remaining: &Signal<u64> = create_signal(cx, 456);
   div()
@@ -25,11 +64,16 @@ fn App<G: Html>(cx: Scope) -> View<G> {
             .dyn_t(|| time_remaining.get().to_string()),
         ),
     )
-    .c(div().class("app-content").c(div().class("app-navbar")))
-    .c(ClickWrapComponent(cx))
-    .c(Form1Component(cx))
-    .c(ContactComponent(cx))
-    .c(PrivacyComponent(cx))
+    .c(
+      div().class("app-content")
+        .c(div().class("app-navbar").c(NavBarComponent(cx)))
+        .c(div().class("app-main")
+          .c(Router1(cx)))
+        .c(div().class("app-info")
+          .c(PrivacyComponent(cx))))
+    // .c(Form1Component(cx))
+    // .c(ContactComponent(cx))
+    // .c(PrivacyComponent(cx))
     .view(cx)
   //   let name = create_signal(cx, String::new());
   //   div()
@@ -86,7 +130,8 @@ fn ClickWrapComponent<G: Html>(cx: Scope) -> View<G> {
     .c(p().t("[ENGLISH] ").t(LOREM_IPSUM))
     .c(
       div().class("main-buttons").c(
-        button()
+        a().attr("href", "/form1").c(
+          button()
           .class("btn btn-primary")
           // (click)="accept()"
           // routerLink="/form1"
@@ -119,6 +164,7 @@ fn ClickWrapComponent<G: Html>(cx: Scope) -> View<G> {
                   .attr("role", "presentation"),
               ),
           ),
+        ),
       ),
     )
     .view(cx)
@@ -169,12 +215,58 @@ fn Form1Component<G: Html>(cx: Scope) -> View<G> {
 }
 
 #[component]
-fn PrivacyComponent<G: Html>(cx: Scope) -> View<G> {
-  div().c(h2().t("Privacy")).c(p().t(LOREM_IPSUM)).view(cx)
+fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
+  div()
+    .class("btn-group-vertical")
+    .attr("role", "group")
+    .c(
+      button()
+        .class("grid-row-1")
+        .attr("type", "button")
+        .dangerously_set_inner_html("Espa&ntilde;ol")
+        .c(
+          svg()
+            .attr("alt", "")
+            .attr("fill", "#000")
+            .attr("focusable", "false")
+            .attr("height", "24")
+            .attr("role", "presentation")
+            .attr("viewBox", "0 0 24 24")
+            .attr("width", "24")
+            .attr("xmlns", "http://www.w3.org/2000/svg")
+            .c(
+              path()
+                .attr("alt", "")
+                .attr("d", "M0 0h24v24H0z")
+                .attr("fill", "none")
+                .attr("role", "presentation"),
+            )
+            .c(
+              path()
+                .attr("alt", "")
+                .attr("d",
+    "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22
+    12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63
+    3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43
+    1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4
+    12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82
+    2h2.95c.32 1.25.78 2.45 1.38
+    3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93
+    4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12
+    19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91
+    3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2
+    0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25
+    5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33
+    3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26
+    1.31.26 2s-.1 1.36-.26 2h-3.38z")
+                .attr("role", "presentation"),
+            ),
+        ),
+    )
+    .view(cx)
 }
 
-fn main() {
-  console_error_panic_hook::set_once();
-  console_log::init_with_level(log::Level::Debug).unwrap();
-  sycamore::render(|cx| component(|| App(cx)));
+#[component]
+fn PrivacyComponent<G: Html>(cx: Scope) -> View<G> {
+  div().c(h2().t("Privacy")).c(p().t(LOREM_IPSUM)).view(cx)
 }
