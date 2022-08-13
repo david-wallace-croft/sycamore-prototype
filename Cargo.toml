@@ -1,0 +1,17 @@
+[package]
+name = "sycamore-prototype"
+version = "0.1.0"
+authors = ["David Wallace Croft <david@croftsoft.com>"]
+# Use the categories from https://crates.io/categories
+# categories = ["category-name"]
+# description = "project description"
+edition = "2021"
+homepage = "http://www.croftsoft.com/"
+# keywords = ["keyword"]
+license = "MIT"
+publish = false
+readme = "README.md"
+repository = "https://github.com/david-wallace-croft/sycamore-prototype"
+
+[dependencies]
+sycamore = "0.8.0-beta.7"
