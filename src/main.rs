@@ -208,9 +208,21 @@ fn Form1Component<G: Html>(cx: Scope) -> View<G> {
                 .attr("maxlength", "11")
                 .attr("name", "idn")
                 .attr("pattern", "^(\\d{9}|(\\d{3}-\\d{2}-\\d{4}))$")
-                .attr("placeholder", "[characters masked]")
                 .attr("required", "required")
-                .attr("type", "password"),
+                .dyn_attr("type", || {
+                  if *show.get() {
+                    Some("text")
+                  } else {
+                    Some("password")
+                  }
+                })
+                .dyn_attr("placeholder", || {
+                  if *show.get() {
+                    Some("[characters shown]")
+                  } else {
+                    Some("[characters masked]")
+                  }
+                }),
             ),
         )
         .c(
