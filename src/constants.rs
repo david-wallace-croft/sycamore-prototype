@@ -16,6 +16,10 @@ pub const SVG_ACCESSIBILITY: &str = "\
   M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 \
   7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z";
 
+pub const SVG_CLEAR: &str = "\
+  M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 \
+  1H5v2h14V4z";
+
 pub const SVG_CONTACT: &str = "\
   M21 8V7l-3 2-3-2v1l3 2 3-2zm1-5H2C.9 3 0 3.9 0 5v14c0 1.1.9 2 2 2h20c1.1 0 \
   1.99-.9 1.99-2L24 5c0-1.1-.9-2-2-2zM8 6c1.66 0 3 1.34 3 3s-1.34 3-3 \
