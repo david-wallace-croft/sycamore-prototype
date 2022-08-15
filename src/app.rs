@@ -8,6 +8,8 @@ use sycamore::prelude::*;
 pub fn AppComponent<G: Html>(cx: Scope) -> View<G> {
   let banner_width: &Signal<u64> = create_signal(cx, 123);
   let time_remaining: &Signal<u64> = create_signal(cx, 456);
+  let info_component: &Signal<bool> = create_signal(cx, false);
+  provide_context_ref(cx, info_component);
   div()
     .c(
       h1()
@@ -22,14 +24,17 @@ pub fn AppComponent<G: Html>(cx: Scope) -> View<G> {
         ),
     )
     .c(
-      div().class("app-content")
+      div()
+        .class("app-content")
         .c(div().class("app-navbar").c(NavBarComponent(cx)))
-        .c(div().class("app-main")
-          .c(Router1(cx)))
-        .c(div().class("app-info")
-          .c(PrivacyComponent(cx))))
-    // .c(Form1Component(cx))
-    // .c(ContactComponent(cx))
-    // .c(PrivacyComponent(cx))
+        .c(div().class("app-main").c(Router1(cx)))
+        .c(div().class("app-info").dyn_c(move || {
+          if *info_component.get() {
+            PrivacyComponent(cx)
+          } else {
+            View::empty()
+          }
+        })),
+    )
     .view(cx)
 }
