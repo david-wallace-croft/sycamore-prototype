@@ -4,6 +4,7 @@ use sycamore::prelude::*;
 
 #[component]
 pub fn ClickWrapComponent<G: Html>(cx: Scope) -> View<G> {
+  let language_toggle = use_context::<Signal<bool>>(cx);
   div()
     .class("app-click-wrap-component warning")
     .c(
@@ -31,14 +32,26 @@ pub fn ClickWrapComponent<G: Html>(cx: Scope) -> View<G> {
                 .attr("d", "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z")
                 .attr("role", "presentation"),
             ),
-          // <ng-template
-          //   appLang="es">
-          // ESTA ES UNA DEMOSTRACI&Oacute;N
-          // </ng-template>
         )
-        .t("THIS IS A DEMONSTRATION"),
+        .dyn_if(
+          || *language_toggle.get(),
+          || span().dyn_t(|| "THIS IS A DEMONSTRATION"),
+          || {
+            span().dyn_dangerously_set_inner_html(|| {
+              "ESTA ES UNA DEMOSTRACI&Oacute;N"
+            })
+          },
+        ),
     )
-    .c(p().t("[ENGLISH] ").t(LOREM_IPSUM))
+    .c(
+      p()
+        .dyn_if(
+          || *language_toggle.get(),
+          || span().dyn_t(|| "[English] "),
+          || span().dyn_dangerously_set_inner_html(|| "[Espa&ntilde;ol] "),
+        )
+        .t(LOREM_IPSUM),
+    )
     .c(
       div().class("main-buttons").c(
         a().attr("href", "/form1").c(
