@@ -1,8 +1,10 @@
+mod accessibility;
 mod app;
 mod click_wrap;
 mod constants;
 mod contact;
 mod form1;
+mod help;
 mod nav_bar;
 mod privacy;
 mod router;

@@ -7,14 +7,22 @@ use sycamore_router::navigate;
 #[component]
 pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
   let info_component = use_context::<Signal<InfoEnum>>(cx);
+  let language_toggle = use_context::<Signal<bool>>(cx);
   div()
     .class("btn-group-vertical")
     .attr("role", "group")
     .c(
       button()
-        .class("grid-row-1")
         .attr("type", "button")
-        .dangerously_set_inner_html("Espa&ntilde;ol")
+        .class("grid-row-1")
+        .dyn_if(
+          || *language_toggle.get(),
+          || span().dyn_dangerously_set_inner_html(|| "Espa&ntilde;ol"),
+          || span().dyn_t(|| "English"),
+        )
+        .on("click", |_| {
+          language_toggle.set(!*language_toggle.get());
+        })
         .c(
           svg()
             .attr("alt", "")
@@ -41,56 +49,70 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
         ),
     )
     .c(
-      button().class("grid-row-2").attr("type", "button").t("Help").c(
-        svg()
-          .attr("alt", "")
-          .attr("fill", "#000")
-          .attr("focusable", "false")
-          .attr("height", "24")
-          .attr("role", "presentation")
-          .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-          .attr("width", "24")
-          .attr("xmlns", BUTTON_SVG_XMLNS)
-          .c(
-            path()
-              .attr("alt", "")
-              .attr("d", BUTTON_SVG_PREFIX)
-              .attr("fill", "none")
-              .attr("role", "presentation"),
-          )
-          .c(
-            path()
-              .attr("alt", "")
-              .attr("d", SVG_HELP)
-              .attr("role", "presentation"),
-          ),
-      ),
+      button()
+        .attr("type", "button")
+        .class("grid-row-2")
+        .on("click", |_| {
+          info_component.set(InfoEnum::Help);
+        })
+        .t("Help")
+        .c(
+          svg()
+            .attr("alt", "")
+            .attr("fill", "#000")
+            .attr("focusable", "false")
+            .attr("height", "24")
+            .attr("role", "presentation")
+            .attr("viewBox", BUTTON_SVG_VIEW_BOX)
+            .attr("width", "24")
+            .attr("xmlns", BUTTON_SVG_XMLNS)
+            .c(
+              path()
+                .attr("alt", "")
+                .attr("d", BUTTON_SVG_PREFIX)
+                .attr("fill", "none")
+                .attr("role", "presentation"),
+            )
+            .c(
+              path()
+                .attr("alt", "")
+                .attr("d", SVG_HELP)
+                .attr("role", "presentation"),
+            ),
+        ),
     )
     .c(
-      button().class("grid-row-3").attr("type", "button").t("Accessibility").c(
-        svg()
-          .attr("alt", "")
-          .attr("fill", "#000")
-          .attr("focusable", "false")
-          .attr("height", "24")
-          .attr("role", "presentation")
-          .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-          .attr("width", "24")
-          .attr("xmlns", BUTTON_SVG_XMLNS)
-          .c(
-            path()
-              .attr("alt", "")
-              .attr("d", BUTTON_SVG_PREFIX)
-              .attr("fill", "none")
-              .attr("role", "presentation"),
-          )
-          .c(
-            path()
-              .attr("alt", "")
-              .attr("d", SVG_ACCESSIBILITY)
-              .attr("role", "presentation"),
-          ),
-      ),
+      button()
+        .attr("type", "button")
+        .class("grid-row-3")
+        .on("click", |_| {
+          info_component.set(InfoEnum::Accessibility);
+        })
+        .t("Accessibility")
+        .c(
+          svg()
+            .attr("alt", "")
+            .attr("fill", "#000")
+            .attr("focusable", "false")
+            .attr("height", "24")
+            .attr("role", "presentation")
+            .attr("viewBox", BUTTON_SVG_VIEW_BOX)
+            .attr("width", "24")
+            .attr("xmlns", BUTTON_SVG_XMLNS)
+            .c(
+              path()
+                .attr("alt", "")
+                .attr("d", BUTTON_SVG_PREFIX)
+                .attr("fill", "none")
+                .attr("role", "presentation"),
+            )
+            .c(
+              path()
+                .attr("alt", "")
+                .attr("d", SVG_ACCESSIBILITY)
+                .attr("role", "presentation"),
+            ),
+        ),
     )
     .c(
       button()
@@ -160,9 +182,9 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
     )
     .c(
       button()
-        .on("click", |_| navigate("/"))
-        .class("grid-row-6")
         .attr("type", "button")
+        .class("grid-row-6")
+        .on("click", |_| navigate("/"))
         .t("Exit")
         .c(
           svg()
