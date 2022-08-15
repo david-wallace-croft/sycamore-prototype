@@ -1,3 +1,4 @@
+use crate::app::InfoEnum;
 use crate::constants::*;
 use sycamore::builder::prelude::*;
 use sycamore::prelude::*;
@@ -5,7 +6,7 @@ use sycamore_router::navigate;
 
 #[component]
 pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
-  let info_component = use_context::<Signal<bool>>(cx);
+  let info_component = use_context::<Signal<InfoEnum>>(cx);
   div()
     .class("btn-group-vertical")
     .attr("role", "group")
@@ -92,37 +93,44 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
       ),
     )
     .c(
-      button().class("grid-row-4").attr("type", "button").t("Contact").c(
-        svg()
-          .attr("alt", "")
-          .attr("fill", "#000")
-          .attr("focusable", "false")
-          .attr("height", "24")
-          .attr("role", "presentation")
-          .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-          .attr("width", "24")
-          .attr("xmlns", BUTTON_SVG_XMLNS)
-          .c(
-            path()
-              .attr("alt", "")
-              .attr("d", BUTTON_SVG_PREFIX)
-              .attr("fill", "none")
-              .attr("role", "presentation"),
-          )
-          .c(
-            path()
-              .attr("alt", "")
-              .attr("d", SVG_CONTACT)
-              .attr("role", "presentation"),
-          ),
-      ),
+      button()
+        .attr("type", "button")
+        .class("grid-row-4")
+        .on("click", |_| {
+          info_component.set(InfoEnum::Contact);
+        })
+        .t("Contact")
+        .c(
+          svg()
+            .attr("alt", "")
+            .attr("fill", "#000")
+            .attr("focusable", "false")
+            .attr("height", "24")
+            .attr("role", "presentation")
+            .attr("viewBox", BUTTON_SVG_VIEW_BOX)
+            .attr("width", "24")
+            .attr("xmlns", BUTTON_SVG_XMLNS)
+            .c(
+              path()
+                .attr("alt", "")
+                .attr("d", BUTTON_SVG_PREFIX)
+                .attr("fill", "none")
+                .attr("role", "presentation"),
+            )
+            .c(
+              path()
+                .attr("alt", "")
+                .attr("d", SVG_CONTACT)
+                .attr("role", "presentation"),
+            ),
+        ),
     )
     .c(
       button()
         .attr("type", "button")
         .class("grid-row-5")
         .on("click", |_| {
-          info_component.set(true);
+          info_component.set(InfoEnum::Privacy);
         })
         .t("Privacy")
         .c(
