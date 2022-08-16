@@ -1,3 +1,4 @@
+use crate::button::*;
 use crate::constants::*;
 use sycamore::builder::prelude::*;
 use sycamore::prelude::*;
@@ -44,32 +45,14 @@ pub fn Form1Component<G: Html>(cx: Scope) -> View<G> {
                 }),
             ),
         )
-        .c(
-          button().class("btn btn-info").attr("type", "reset").t("Clear").c(
-            svg()
-              .attr("alt", "")
-              .attr("fill", "#000")
-              .attr("focusable", "false")
-              .attr("height", "24")
-              .attr("role", "presentation")
-              .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-              .attr("width", "24")
-              .attr("xmlns", BUTTON_SVG_XMLNS)
-              .c(
-                path()
-                  .attr("alt", "")
-                  .attr("d", BUTTON_SVG_PREFIX)
-                  .attr("fill", "none")
-                  .attr("role", "presentation"),
-              )
-              .c(
-                path()
-                  .attr("alt", "")
-                  .attr("d", SVG_CLEAR)
-                  .attr("role", "presentation"),
-              ),
-          ),
-        )
+        .c(ButtonComponent(
+          cx,
+          ButtonProp {
+            attr_type: "reset",
+            svg: SVG_CLEAR,
+            text: "Clear",
+          },
+        ))
         .c(
           button()
             .class("btn btn-info")
