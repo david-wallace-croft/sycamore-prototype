@@ -6,6 +6,7 @@ mod constants;
 mod contact;
 mod form1;
 mod help;
+mod icon;
 mod nav_bar;
 mod privacy;
 mod router;

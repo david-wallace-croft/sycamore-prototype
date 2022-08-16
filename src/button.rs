@@ -1,4 +1,4 @@
-use crate::constants::*;
+use crate::icon::*;
 use sycamore::builder::prelude::*;
 use sycamore::prelude::*;
 
@@ -18,29 +18,11 @@ pub fn ButtonComponent<'a, G: Html>(
     .class("btn btn-info")
     .attr("type", prop.attr_type)
     .t(prop.text)
-    .c(
-      svg()
-        .attr("alt", "")
-        .attr("fill", "#000")
-        .attr("focusable", "false")
-        .attr("height", "24")
-        .attr("role", "presentation")
-        .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-        .attr("width", "24")
-        .attr("xmlns", BUTTON_SVG_XMLNS)
-        .c(
-          path()
-            .attr("alt", "")
-            .attr("d", BUTTON_SVG_PREFIX)
-            .attr("fill", "none")
-            .attr("role", "presentation"),
-        )
-        .c(
-          path()
-            .attr("alt", "")
-            .attr("d", prop.svg)
-            .attr("role", "presentation"),
-        ),
-    )
+    .c(IconComponent(
+      cx,
+      IconProp {
+        svg: prop.svg,
+      },
+    ))
     .view(cx)
 }

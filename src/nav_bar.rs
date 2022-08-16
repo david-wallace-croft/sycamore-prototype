@@ -1,5 +1,6 @@
 use crate::app::InfoEnum;
 use crate::constants::*;
+use crate::icon::*;
 use sycamore::builder::prelude::*;
 use sycamore::prelude::*;
 use sycamore_router::navigate;
@@ -23,30 +24,12 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
         .on("click", |_| {
           language_toggle.set(!*language_toggle.get());
         })
-        .c(
-          svg()
-            .attr("alt", "")
-            .attr("fill", "#000")
-            .attr("focusable", "false")
-            .attr("height", "24")
-            .attr("role", "presentation")
-            .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-            .attr("width", "24")
-            .attr("xmlns", BUTTON_SVG_XMLNS)
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", BUTTON_SVG_PREFIX)
-                .attr("fill", "none")
-                .attr("role", "presentation"),
-            )
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", SVG_LANGUAGE)
-                .attr("role", "presentation"),
-            ),
-        ),
+        .c(IconComponent(
+          cx,
+          IconProp {
+            svg: SVG_LANGUAGE,
+          },
+        )),
     )
     .c(
       button()
@@ -56,30 +39,12 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
           info_component.set(InfoEnum::Help);
         })
         .t("Help")
-        .c(
-          svg()
-            .attr("alt", "")
-            .attr("fill", "#000")
-            .attr("focusable", "false")
-            .attr("height", "24")
-            .attr("role", "presentation")
-            .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-            .attr("width", "24")
-            .attr("xmlns", BUTTON_SVG_XMLNS)
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", BUTTON_SVG_PREFIX)
-                .attr("fill", "none")
-                .attr("role", "presentation"),
-            )
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", SVG_HELP)
-                .attr("role", "presentation"),
-            ),
-        ),
+        .c(IconComponent(
+          cx,
+          IconProp {
+            svg: SVG_HELP,
+          },
+        )),
     )
     .c(
       button()
@@ -89,30 +54,12 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
           info_component.set(InfoEnum::Accessibility);
         })
         .t("Accessibility")
-        .c(
-          svg()
-            .attr("alt", "")
-            .attr("fill", "#000")
-            .attr("focusable", "false")
-            .attr("height", "24")
-            .attr("role", "presentation")
-            .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-            .attr("width", "24")
-            .attr("xmlns", BUTTON_SVG_XMLNS)
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", BUTTON_SVG_PREFIX)
-                .attr("fill", "none")
-                .attr("role", "presentation"),
-            )
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", SVG_ACCESSIBILITY)
-                .attr("role", "presentation"),
-            ),
-        ),
+        .c(IconComponent(
+          cx,
+          IconProp {
+            svg: SVG_ACCESSIBILITY,
+          },
+        )),
     )
     .c(
       button()
@@ -122,30 +69,12 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
           info_component.set(InfoEnum::Contact);
         })
         .t("Contact")
-        .c(
-          svg()
-            .attr("alt", "")
-            .attr("fill", "#000")
-            .attr("focusable", "false")
-            .attr("height", "24")
-            .attr("role", "presentation")
-            .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-            .attr("width", "24")
-            .attr("xmlns", BUTTON_SVG_XMLNS)
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", BUTTON_SVG_PREFIX)
-                .attr("fill", "none")
-                .attr("role", "presentation"),
-            )
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", SVG_CONTACT)
-                .attr("role", "presentation"),
-            ),
-        ),
+        .c(IconComponent(
+          cx,
+          IconProp {
+            svg: SVG_CONTACT,
+          },
+        )),
     )
     .c(
       button()
@@ -155,30 +84,12 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
           info_component.set(InfoEnum::Privacy);
         })
         .t("Privacy")
-        .c(
-          svg()
-            .attr("alt", "")
-            .attr("fill", "#000")
-            .attr("focusable", "false")
-            .attr("height", "24")
-            .attr("role", "presentation")
-            .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-            .attr("width", "24")
-            .attr("xmlns", BUTTON_SVG_XMLNS)
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", BUTTON_SVG_PREFIX)
-                .attr("fill", "none")
-                .attr("role", "presentation"),
-            )
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", SVG_PRIVACY)
-                .attr("role", "presentation"),
-            ),
-        ),
+        .c(IconComponent(
+          cx,
+          IconProp {
+            svg: SVG_PRIVACY,
+          },
+        )),
     )
     .c(
       button()
@@ -186,30 +97,12 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
         .class("grid-row-6")
         .on("click", |_| navigate("/"))
         .t("Exit")
-        .c(
-          svg()
-            .attr("alt", "")
-            .attr("fill", "#000")
-            .attr("focusable", "false")
-            .attr("height", "24")
-            .attr("role", "presentation")
-            .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-            .attr("width", "24")
-            .attr("xmlns", BUTTON_SVG_XMLNS)
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", BUTTON_SVG_PREFIX)
-                .attr("fill", "none")
-                .attr("role", "presentation"),
-            )
-            .c(
-              path()
-                .attr("alt", "")
-                .attr("d", SVG_EXIT)
-                .attr("role", "presentation"),
-            ),
-        ),
+        .c(IconComponent(
+          cx,
+          IconProp {
+            svg: SVG_EXIT,
+          },
+        )),
     )
     .view(cx)
 }

@@ -1,5 +1,6 @@
 use crate::button::*;
 use crate::constants::*;
+use crate::icon::*;
 use sycamore::builder::prelude::*;
 use sycamore::prelude::*;
 
@@ -65,53 +66,21 @@ pub fn Form1Component<G: Html>(cx: Scope) -> View<G> {
               }
             })
             .on("click", |_| show.set(!*show.get()))
-            .dyn_c(|| {
+            .dyn_c(move || {
               if *show.get() {
-                svg()
-                  .attr("alt", "")
-                  .attr("fill", "#000")
-                  .attr("focusable", "false")
-                  .attr("height", "24")
-                  .attr("role", "presentation")
-                  .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-                  .attr("width", "24")
-                  .attr("xmlns", BUTTON_SVG_XMLNS)
-                  .c(
-                    path()
-                      .attr("alt", "")
-                      .attr("d", BUTTON_SVG_PREFIX)
-                      .attr("fill", "none")
-                      .attr("role", "presentation"),
-                  )
-                  .c(
-                    path()
-                      .attr("alt", "")
-                      .attr("d", SVG_MASK)
-                      .attr("role", "presentation"),
-                  )
+                IconComponent(
+                  cx,
+                  IconProp {
+                    svg: SVG_MASK,
+                  },
+                )
               } else {
-                svg()
-                  .attr("alt", "")
-                  .attr("fill", "#000")
-                  .attr("focusable", "false")
-                  .attr("height", "24")
-                  .attr("role", "presentation")
-                  .attr("viewBox", BUTTON_SVG_VIEW_BOX)
-                  .attr("width", "24")
-                  .attr("xmlns", BUTTON_SVG_XMLNS)
-                  .c(
-                    path()
-                      .attr("alt", "")
-                      .attr("d", BUTTON_SVG_PREFIX)
-                      .attr("fill", "none")
-                      .attr("role", "presentation"),
-                  )
-                  .c(
-                    path()
-                      .attr("alt", "")
-                      .attr("d", SVG_SHOW)
-                      .attr("role", "presentation"),
-                  )
+                IconComponent(
+                  cx,
+                  IconProp {
+                    svg: SVG_SHOW,
+                  },
+                )
               }
             }),
         ),

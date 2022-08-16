@@ -29,6 +29,9 @@ pub const SVG_CONTACT: &str = "\
 pub const SVG_CONTINUE: &str = "\
   M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z";
 
+pub const SVG_DEMONSTRATION: &str = "\
+  M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z";
+
 pub const SVG_EXIT: &str = "\
   M5 17h14v2H5zm7-12L5.33 15h13.34z";
 
