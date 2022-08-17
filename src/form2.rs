@@ -1,17 +1,16 @@
 use crate::button::*;
 use crate::constants::*;
-use crate::toggle_button::*;
 use sycamore::builder::prelude::*;
 use sycamore::prelude::*;
 use sycamore_router::navigate;
 
 #[component]
-pub fn Form1Component<G: Html>(cx: Scope) -> View<G> {
+pub fn Form2Component<G: Html>(cx: Scope) -> View<G> {
   let show: &Signal<bool> = create_signal(cx, false);
   provide_context_ref(cx, show);
   div()
-    .class("app-form1")
-    .c(h2().t("Form 1 Title"))
+    .class("app-form2")
+    .c(h2().t("Form 2 Title"))
     .c(h3().t("All fields are required"))
     .c(
       form()
@@ -54,7 +53,7 @@ pub fn Form1Component<G: Html>(cx: Scope) -> View<G> {
             svg: SVG_CONTINUE,
             text: "Continue",
           })
-          .on("click", |_| navigate("/form2")),
+          .on("click", |_| navigate("/")),
         )
         .c(ButtonComponent(
           cx,
@@ -64,15 +63,14 @@ pub fn Form1Component<G: Html>(cx: Scope) -> View<G> {
             text: "Clear",
           },
         ))
-        .c(ToggleButtonComponent(
-          cx,
-          ToggleButtonProp {
-            svg_false: SVG_SHOW,
-            svg_true: SVG_MASK,
-            text_false: "Show",
-            text_true: "Mask",
-          },
-        )),
+        .c(
+          button_builder(&ButtonProp {
+            attr_type: "button",
+            svg: SVG_BACK,
+            text: "Back",
+          })
+          .on("click", |_| navigate("/form1")),
+        ),
     )
     .view(cx)
 }

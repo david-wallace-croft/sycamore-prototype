@@ -5,6 +5,7 @@ mod click_wrap;
 mod constants;
 mod contact;
 mod form1;
+mod form2;
 mod help;
 mod icon;
 mod nav_bar;

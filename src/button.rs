@@ -4,6 +4,7 @@ use sycamore::prelude::*;
 
 #[derive(Prop)]
 pub struct ButtonProp<'a> {
+  // TODO: change attr_type to an enum
   pub attr_type: &'a str,
   pub svg: &'a str,
   pub text: &'a str,

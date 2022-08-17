@@ -1,5 +1,6 @@
 use crate::click_wrap::ClickWrapComponent;
 use crate::form1::Form1Component;
+use crate::form2::Form2Component;
 use sycamore::prelude::*;
 use sycamore_router::{HistoryIntegration, Route, Router};
 
@@ -19,6 +20,8 @@ enum AppRoutes {
   Index,
   #[to("/form1")]
   Form1,
+  #[to("/form2")]
+  Form2,
   //   #[to("/form1/<_..>")]
   //   Form1Nested(Form1Nested),
   #[not_found]
@@ -38,6 +41,7 @@ pub fn Router1<G: Html>(cx: Scope) -> View<G> {
             (match route.get().as_ref() {
               AppRoutes::Index => ClickWrapComponent(cx),
               AppRoutes::Form1 => Form1Component(cx),
+              AppRoutes::Form2 => Form2Component(cx),
             //   AppRoutes::Form1Nested(nested) => match nested {
             //     Form1Nested::Contact => ContactComponent(cx),
             //     Form1Nested::Privacy => PrivacyComponent(cx),
