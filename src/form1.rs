@@ -3,6 +3,7 @@ use crate::constants::*;
 use crate::toggle_button::*;
 use sycamore::builder::prelude::*;
 use sycamore::prelude::*;
+use sycamore_router::navigate;
 
 #[component]
 pub fn Form1Component<G: Html>(cx: Scope) -> View<G> {
@@ -47,9 +48,17 @@ pub fn Form1Component<G: Html>(cx: Scope) -> View<G> {
                 }),
             ),
         )
+        .c(
+          button_builder(&ButtonProp {
+            attr_type: "button",
+            svg: SVG_CONTINUE,
+            text: "Continue",
+          })
+          .on("click", |_| navigate("/")),
+        )
         .c(ButtonComponent(
           cx,
-          ButtonProp {
+          &ButtonProp {
             attr_type: "reset",
             svg: SVG_CLEAR,
             text: "Clear",

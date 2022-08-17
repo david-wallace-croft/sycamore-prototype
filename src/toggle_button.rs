@@ -31,14 +31,14 @@ pub fn ToggleButtonComponent<'a, G: Html>(
       if *show.get() {
         IconComponent(
           cx,
-          IconProp {
+          &IconProp {
             svg: prop.svg_true,
           },
         )
       } else {
         IconComponent(
           cx,
-          IconProp {
+          &IconProp {
             svg: prop.svg_false,
           },
         )

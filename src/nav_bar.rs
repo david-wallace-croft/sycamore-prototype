@@ -26,7 +26,7 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
         })
         .c(IconComponent(
           cx,
-          IconProp {
+          &IconProp {
             svg: SVG_LANGUAGE,
           },
         )),
@@ -41,7 +41,7 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
         .t("Help")
         .c(IconComponent(
           cx,
-          IconProp {
+          &IconProp {
             svg: SVG_HELP,
           },
         )),
@@ -56,7 +56,7 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
         .t("Accessibility")
         .c(IconComponent(
           cx,
-          IconProp {
+          &IconProp {
             svg: SVG_ACCESSIBILITY,
           },
         )),
@@ -71,7 +71,7 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
         .t("Contact")
         .c(IconComponent(
           cx,
-          IconProp {
+          &IconProp {
             svg: SVG_CONTACT,
           },
         )),
@@ -86,7 +86,7 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
         .t("Privacy")
         .c(IconComponent(
           cx,
-          IconProp {
+          &IconProp {
             svg: SVG_PRIVACY,
           },
         )),
@@ -99,7 +99,7 @@ pub fn NavBarComponent<G: Html>(cx: Scope) -> View<G> {
         .t("Exit")
         .c(IconComponent(
           cx,
-          IconProp {
+          &IconProp {
             svg: SVG_EXIT,
           },
         )),

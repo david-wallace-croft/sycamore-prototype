@@ -13,7 +13,7 @@ pub fn ClickWrapComponent<G: Html>(cx: Scope) -> View<G> {
       h2()
         .c(IconComponent(
           cx,
-          IconProp {
+          &IconProp {
             svg: SVG_DEMONSTRATION,
           },
         ))
@@ -39,7 +39,7 @@ pub fn ClickWrapComponent<G: Html>(cx: Scope) -> View<G> {
     .c(div().class("main-buttons").c(a().attr("href", "/form1").c(
       ButtonComponent(
         cx,
-        ButtonProp {
+        &ButtonProp {
           attr_type: "button",
           text: "Continue",
           svg: SVG_CONTINUE,
