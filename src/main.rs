@@ -10,6 +10,7 @@ mod icon;
 mod nav_bar;
 mod privacy;
 mod router;
+mod toggle_button;
 
 use app::AppComponent;
 use sycamore::builder::prelude::*;

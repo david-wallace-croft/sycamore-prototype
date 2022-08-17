@@ -1,12 +1,13 @@
 use crate::button::*;
 use crate::constants::*;
-use crate::icon::*;
+use crate::toggle_button::*;
 use sycamore::builder::prelude::*;
 use sycamore::prelude::*;
 
 #[component]
 pub fn Form1Component<G: Html>(cx: Scope) -> View<G> {
   let show: &Signal<bool> = create_signal(cx, false);
+  provide_context_ref(cx, show);
   div()
     .class("app-form1")
     .c(h2().t("Form 1 Title"))
@@ -54,36 +55,15 @@ pub fn Form1Component<G: Html>(cx: Scope) -> View<G> {
             text: "Clear",
           },
         ))
-        .c(
-          button()
-            .class("btn btn-info")
-            .attr("type", "button")
-            .dyn_t(|| {
-              if *show.get() {
-                "Mask"
-              } else {
-                "Show"
-              }
-            })
-            .on("click", |_| show.set(!*show.get()))
-            .dyn_c(move || {
-              if *show.get() {
-                IconComponent(
-                  cx,
-                  IconProp {
-                    svg: SVG_MASK,
-                  },
-                )
-              } else {
-                IconComponent(
-                  cx,
-                  IconProp {
-                    svg: SVG_SHOW,
-                  },
-                )
-              }
-            }),
-        ),
+        .c(ToggleButtonComponent(
+          cx,
+          ToggleButtonProp {
+            svg_false: SVG_SHOW,
+            svg_true: SVG_MASK,
+            text_false: "Show",
+            text_true: "Mask",
+          },
+        )),
     )
     .view(cx)
 }
